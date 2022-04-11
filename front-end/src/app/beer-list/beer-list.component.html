@@ -1,1 +1,6 @@
-<p>beer-list works!</p>
+<div class="contain">
+    <h1>Beers list</h1>
+    <div *ngFor="let beer of beers">
+        <app-beer-card [beer]="beer"></app-beer-card>
+    </div>
+</div>

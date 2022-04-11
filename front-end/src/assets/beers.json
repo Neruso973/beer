@@ -1,0 +1,47 @@
+[{
+    "id": 0,
+    "name": "Wild JS",
+    "houblon": [
+      {
+        "name": "citra",
+        "origin": "US",
+        "quantity": 580
+      }
+    ],
+    "malts": [
+      {
+        "name": "Chocolat",
+        "origin": "US",
+        "quantity": 580
+      }
+    ],
+    "price": 63,
+    "etiquette": "string"
+  },
+  {
+    "id": 1,
+    "name": "Chasseresse",
+    "houblon": [
+      {
+        "name": "citra",
+        "origin": "US",
+        "quantity": 580
+      }
+    ],
+    "malts": [
+      {
+        "name": "flocon de froment",
+        "origin": "US",
+        "quantity": 580
+      }
+    ],
+    "other": [
+      {
+        "name": "basilic",
+        "quantity": 580,
+        "unity": "g"
+      }
+    ],
+    "price": 63,
+    "etiquette": "string"
+  }]
