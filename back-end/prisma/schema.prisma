@@ -10,11 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Beer {
+  id        Int    @id @default(autoincrement())
+  name      String @db.VarChar(255)
+  type      String @db.VarChar(255)
+  houblon   Json
+  malts     Json
+  other     Json?
+  levure    String @db.VarChar(255)
+  price     Int
+  etiquette String @db.VarChar(255)
+}
+
 model Houblon {
   id     Int    @id @default(autoincrement())
   name   String @db.VarChar(255)
   origin String @db.VarChar(255)
-  type   Int
 }
 
 model Malt {
@@ -24,7 +35,6 @@ model Malt {
 }
 
 model Levure {
-  id     Int    @id @default(autoincrement())
-  name   String @db.VarChar(255)
-  origin String @db.VarChar(255)
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
 }
