@@ -1,6 +1,7 @@
 [{
     "id": 0,
     "name": "Wild JS",
+    "type": "Ambré",
     "houblon": [
       {
         "name": "citra",
@@ -16,11 +17,12 @@
       }
     ],
     "price": 63,
-    "etiquette": "string"
+    "etiquette": "https://static.pratique.fr/images/unsized/et/etiquette-champagne.jpg"
   },
   {
     "id": 1,
     "name": "Chasseresse",
+    "type": "Blanche",
     "houblon": [
       {
         "name": "citra",
@@ -43,5 +45,5 @@
       }
     ],
     "price": 63,
-    "etiquette": "string"
+    "etiquette": "https://static.pratique.fr/images/unsized/et/etiquette-champagne.jpg"
   }]

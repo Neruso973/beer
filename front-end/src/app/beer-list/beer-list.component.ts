@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BeersService } from '../beers.service';
+import { BeersService } from '../services/beers.service';
 import { beers } from '../data/interfaces';
 
 @Component({
@@ -19,5 +19,8 @@ export class BeerListComponent implements OnInit {
     this.service.getBeers().subscribe((param_data: Array<beers>) => {
       this.beers = param_data;
     });
+  }
+  newBeer(beer: beers) {
+    this.service.addBeers(beer).subscribe();
   }
 }

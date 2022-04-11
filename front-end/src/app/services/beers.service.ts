@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { beers } from './data/interfaces';
+import { beers } from '../data/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +16,13 @@ export class BeersService {
   public getBeers(): Observable<Array<beers>> {
     const beer: Observable<any> = this.service.get('../assets/beers.json');
     return beer;
+  }
+
+  public addBeers(beer: beers): Observable<beers> {
+    const newBeer: Observable<any> = this.service.post(
+      '../assets/beers.json',
+      beer
+    );
+    return newBeer;
   }
 }
