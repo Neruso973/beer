@@ -47,9 +47,33 @@ PUT http://localhost:3000/beers/1
 Content-Type: application/json
 
 {
-    "username": "admin",
-    "clearPassword" : "rootroot"
-}
+    "name": "Wild JS",
+    "type": "Ambré",
+    "houblon": [
+      {
+        "name": "citra",
+        "origin": "US",
+        "quantity": 580
+      }
+    ],
+    "malts": [
+      {
+        "name": "flocon de froment",
+        "origin": "US",
+        "quantity": 580
+      }
+    ],
+    "other": [
+      {
+        "name": "basilic",
+        "quantity": 580,
+        "unity": "g"
+      }
+    ],
+    "levure": "MS-U44",
+    "price": 63,
+    "etiquette": "https://static.pratique.fr/images/unsized/et/etiquette-champagne.jpg"
+  }
 
 ####################
 
