@@ -1,0 +1,17 @@
+.beer {
+  border: 1px solid black;
+  width: 20em;
+  height: 25em;
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  text-align: center;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em;
+}
