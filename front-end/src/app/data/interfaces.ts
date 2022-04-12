@@ -3,8 +3,8 @@ export interface beers {
   name: string;
   type: string;
   houblon: Houblon[];
-  malts: Array<Malt>;
-  other?: Array<Other>;
+  malts: Malt[];
+  other?: Other[];
   levure: string;
   price: number;
   etiquette: string;
