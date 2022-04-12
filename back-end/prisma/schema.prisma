@@ -23,18 +23,15 @@ model Beer {
 }
 
 model Houblon {
-  id       Int    @id @default(autoincrement())
-  name     String @db.VarChar(255)
-  origin   String @db.VarChar(255)
-  quantity Int
-  Timer    Int
+  id     Int    @id @default(autoincrement())
+  name   String @db.VarChar(255)
+  origin String @db.VarChar(255)
 }
 
 model Malt {
-  id       Int    @id @default(autoincrement())
-  name     String @db.VarChar(255)
-  origin   String @db.VarChar(255)
-  quantity Int
+  id     Int    @id @default(autoincrement())
+  name   String @db.VarChar(255)
+  origin String @db.VarChar(255)
 }
 
 model Levure {

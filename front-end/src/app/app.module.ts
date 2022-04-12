@@ -9,9 +9,10 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { BeerListComponent } from './beer-list/beer-list.component';
 import { BeerCardComponent } from './beer-card/beer-card.component';
+import { BeerDescriptionComponent } from './beer-description/beer-description.component';
 
 @NgModule({
-  declarations: [AppComponent, BeerListComponent, BeerCardComponent],
+  declarations: [AppComponent, BeerListComponent, BeerCardComponent, BeerDescriptionComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
