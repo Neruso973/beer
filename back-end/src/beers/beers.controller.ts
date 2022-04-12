@@ -10,21 +10,21 @@ import {
 import { BeerService } from './beers.service';
 import { Beer as BeerModel, Prisma } from '@prisma/client';
 
-@Controller()
+@Controller('beers')
 export class BeersController {
   constructor(private readonly beerService: BeerService) {}
 
-  @Get('beers/:id')
+  @Get(':id')
   async getBeerById(@Param('id') id: string): Promise<BeerModel> {
     return this.beerService.getBeerById({ id: Number(id) });
   }
 
-  @Get('beers')
+  @Get()
   async getBeers(): Promise<BeerModel[]> {
     return this.beerService.getBeers();
   }
 
-  @Post('beers')
+  @Post()
   async createBeer(
     @Body() beersData: Prisma.BeerCreateInput,
   ): Promise<BeerModel> {
@@ -34,7 +34,7 @@ export class BeersController {
     });
   }
 
-  @Put('beers/:id')
+  @Put(':id')
   async updatebeer(
     @Body() beersData: Prisma.BeerUpdateInput,
     @Param('id') id: string,
@@ -46,7 +46,7 @@ export class BeersController {
     });
   }
 
-  @Delete('beers/:id')
+  @Delete(':id')
   async deleteBeer(@Param('id') id: string): Promise<BeerModel> {
     return this.beerService.deleteBeer({ id: Number(id) });
   }
