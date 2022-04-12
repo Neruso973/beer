@@ -1,0 +1,16 @@
+<div>
+    <img src={{beer.etiquette}} alt={{beer.name}}>
+    <h1>{{beer.name}}</h1>
+    <h2>houblon:</h2>
+    <div *ngFor="let houblon of beer.houblon">
+        <p>
+            variété: {{houblon.name}}
+        </p>
+        <p>
+            quantité: {{houblon.quantity}}g
+        </p>
+        <p>
+            temps apres ebulition: {{houblon.timer}}
+        </p>
+    </div>
+</div>

@@ -1,11 +1,11 @@
-<div class="beer">
-    <img src="{{ beer.etiquette }}" alt="{{ beer.name }}" style="width: 100%;"
-        />
-    <div class="description">
-        <h1 class="name">{{ beer.name }}</h1>
-        <span class="info">
-            <h2 class="type">{{beer.type}}</h2>
-            <h2 class="price">{{ beer.price }} €</h2>
-        </span>
-    </div>
+<div class="beer" (click)="go(beer.id)">
+  <img src="{{ beer.etiquette }}" alt="{{ beer.name }}" style="width: 100%;"
+    />
+  <div class="description">
+    <h1 class="name">{{ beer.name }}</h1>
+    <span class="info">
+      <h2 class="type">{{beer.type}}</h2>
+      <h2 class="price">{{ beer.price }} €</h2>
+    </span>
+  </div>
 </div>
