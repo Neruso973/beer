@@ -1,0 +1,56 @@
+GET  http://localhost:3000/beers/
+Content-Type: application/json
+
+##################
+
+get http://localhost:3000/beers/1
+Content-Type: application/json
+
+##################
+
+POST http://localhost:3000/beers/
+Content-Type: application/json
+
+ {
+    "name": "Chasseresse",
+    "type": "Blanche",
+    "houblon": [
+      {
+        "name": "citra",
+        "origin": "US",
+        "quantity": 580
+      }
+    ],
+    "malts": [
+      {
+        "name": "flocon de froment",
+        "origin": "US",
+        "quantity": 580
+      }
+    ],
+    "other": [
+      {
+        "name": "basilic",
+        "quantity": 580,
+        "unity": "g"
+      }
+    ],
+    "levure": "MS-U44",
+    "price": 63,
+    "etiquette": "https://static.pratique.fr/images/unsized/et/etiquette-champagne.jpg"
+  }
+
+###################
+
+
+PUT http://localhost:3000/beers/1
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "clearPassword" : "rootroot"
+}
+
+####################
+
+DELETE http://localhost:3000/beers/1
