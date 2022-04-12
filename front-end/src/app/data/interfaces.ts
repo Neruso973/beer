@@ -2,7 +2,7 @@ export interface beers {
   id: number;
   name: string;
   type: string;
-  houblon: Array<Houblon>;
+  houblon: Houblon[];
   malts: Array<Malt>;
   other?: Array<Other>;
   levure: string;
@@ -15,6 +15,7 @@ export interface Houblon {
   name: string;
   origin: string;
   quantity: number;
+  timer: number;
 }
 
 export interface Malt {

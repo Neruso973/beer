@@ -6,6 +6,7 @@ export class Beer {
   name: string = '';
   type: string = '';
   houblon: Array<Houblon> = [];
+  houblonTimer: number = 0;
   malts: Array<Malt> = [];
   other?: Array<Other> = [];
   levure: string = '';
