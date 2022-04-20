@@ -12,9 +12,9 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
  {
-    "username": "Neruxxxso",
-    "password": "Azerty",
-    "email": "exesqmdfgple1@ccmail.com"
+    "username": "nu",
+    "password": "Azertyzofn",
+    "email": "exesqdmczdfgple1@ccmail.com"
   }
 
 ##################
@@ -23,9 +23,8 @@ POST http://localhost:3000/auth/signin
 Content-Type: application/json
 
  {
-    "username": "Neruxxxso",
-    "password": "Azerty",
-    "email": "exesqmdfgple1@ccmail.com"
+    "username": "neru",
+    "password": "Azertyzofn"
   }
 
 ###################
