@@ -20,7 +20,9 @@ export class AuthController {
 
   @Post('signin')
   @UsePipes(new JoiValidationPipe(signinSchema))
-  async signin(@Body() userData: Prisma.UserCreateInput): Promise<returnUser> {
+  async signin(@Body() userData: Prisma.UserCreateInput): Promise<{
+    access_token: string;
+  }> {
     const { ...data } = userData;
     return this.authService.signin({
       ...data,

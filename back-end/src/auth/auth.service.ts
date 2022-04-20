@@ -9,6 +9,7 @@ import { UsersService } from 'src/users/users.service';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
 import { returnUser } from './interface';
+import { JwtService } from '@nestjs/jwt';
 
 const scrypt = promisify(_scrypt);
 
@@ -17,6 +18,7 @@ export class AuthService {
   constructor(
     private prisma: PrismaService,
     private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async signup({
@@ -53,7 +55,9 @@ export class AuthService {
     return user;
   }
 
-  async signin(data: Prisma.UserCreateInput): Promise<returnUser> {
+  async signin(data: Prisma.UserCreateInput): Promise<{
+    access_token: string;
+  }> {
     const username = data.username;
     const clearPassword = data.password;
     const user = await this.usersService.getUserByUsername({ username });
@@ -67,7 +71,13 @@ export class AuthService {
       throw new BadRequestException('bad password');
     }
     const { password, ...userObject } = user;
-    return userObject;
+    const payload = {
+      createdAt: new Date().toISOString(),
+      sub: userObject.id,
+      username: userObject.username,
+      email: userObject.email,
+    };
+    return { access_token: this.jwtService.sign(payload) };
   }
 
   async updateUser(userData: User): Promise<User> {
