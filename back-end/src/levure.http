@@ -3,7 +3,7 @@ Content-Type: application/json
 
 ##################
 
-get http://localhost:3000/levure/1
+get http://localhost:3000/levure/2
 Content-Type: application/json
 
 ##################
@@ -18,13 +18,13 @@ Content-Type: application/json
 ###################
 
 
-PUT http://localhost:3000/levure/1
+PUT http://localhost:3000/levure/2
 Content-Type: application/json
 
 {
     "name": "Wild JS"
-  }
+}
 
 ####################
 
-DELETE http://localhost:3000/levure/1
+DELETE http://localhost:3000/levure/2

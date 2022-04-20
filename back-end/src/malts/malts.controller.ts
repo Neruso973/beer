@@ -6,17 +6,20 @@ import {
   Body,
   Put,
   Delete,
+  UsePipes,
 } from '@nestjs/common';
 import { MaltService } from './malts.service';
 import { Malt as MaltModel, Prisma } from '@prisma/client';
+import { ConvertParamToNumberPipe } from 'src/pipe/ConvertParamToNumber.pipe';
 
 @Controller('malts')
 export class MaltsController {
   constructor(private readonly maltService: MaltService) {}
 
   @Get(':id')
-  async getMaltById(@Param('id') id: string): Promise<MaltModel> {
-    return this.maltService.getMaltById({ id: Number(id) });
+  @UsePipes(ConvertParamToNumberPipe)
+  async getMaltById(@Param('id') id: number): Promise<MaltModel> {
+    return this.maltService.getMaltById({ id });
   }
 
   @Get()
@@ -35,19 +38,21 @@ export class MaltsController {
   }
 
   @Put(':id')
+  @UsePipes(ConvertParamToNumberPipe)
   async updatemalt(
     @Body() maltsData: Prisma.MaltUpdateInput,
-    @Param('id') id: string,
+    @Param('id') id: number,
   ): Promise<MaltModel> {
     const { ...data } = maltsData;
     return this.maltService.updatemalt({
-      where: { id: Number(id) },
+      where: { id },
       data: { ...data },
     });
   }
 
   @Delete(':id')
-  async deleteMalt(@Param('id') id: string): Promise<MaltModel> {
-    return this.maltService.deleteMalt({ id: Number(id) });
+  @UsePipes(ConvertParamToNumberPipe)
+  async deleteMalt(@Param('id') id: number): Promise<MaltModel> {
+    return this.maltService.deleteMalt({ id });
   }
 }

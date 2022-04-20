@@ -6,22 +6,34 @@ import {
   Body,
   Put,
   Delete,
+  UsePipes,
+  NotFoundException,
 } from '@nestjs/common';
 import { BeerService } from './beers.service';
 import { Beer as BeerModel, Prisma } from '@prisma/client';
+import { ConvertParamToNumberPipe } from 'src/pipe/ConvertParamToNumber.pipe';
 
 @Controller('beers')
 export class BeersController {
   constructor(private readonly beerService: BeerService) {}
 
   @Get(':id')
-  async getBeerById(@Param('id') id: string): Promise<BeerModel> {
-    return this.beerService.getBeerById({ id: Number(id) });
+  @UsePipes(ConvertParamToNumberPipe)
+  async getBeerById(@Param('id') id: number): Promise<BeerModel> {
+    const beer = await this.beerService.getBeerById({ id });
+    if (!beer) {
+      throw new NotFoundException('No beer found');
+    }
+    return beer;
   }
 
   @Get()
   async getBeers(): Promise<BeerModel[]> {
-    return this.beerService.getBeers();
+    const beers = await this.beerService.getBeers();
+    if (beers.length === 0) {
+      throw new NotFoundException('No beers found');
+    }
+    return beers;
   }
 
   @Post()
@@ -35,19 +47,29 @@ export class BeersController {
   }
 
   @Put(':id')
+  @UsePipes(ConvertParamToNumberPipe)
   async updatebeer(
+    @Param('id') id: number,
     @Body() beersData: Prisma.BeerUpdateInput,
-    @Param('id') id: string,
   ): Promise<BeerModel> {
     const { ...data } = beersData;
+    const beer = await this.beerService.getBeerById({ id });
+    if (!beer) {
+      throw new NotFoundException('No beer can be updated');
+    }
     return this.beerService.updatebeer({
-      where: { id: Number(id) },
+      where: { id },
       data: { ...data },
     });
   }
 
   @Delete(':id')
-  async deleteBeer(@Param('id') id: string): Promise<BeerModel> {
-    return this.beerService.deleteBeer({ id: Number(id) });
+  @UsePipes(ConvertParamToNumberPipe)
+  async deleteBeer(@Param('id') id: number): Promise<BeerModel> {
+    const beer = await this.beerService.getBeerById({ id });
+    if (!beer) {
+      throw new NotFoundException('No beer can be delated');
+    }
+    return this.beerService.deleteBeer({ id });
   }
 }

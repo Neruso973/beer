@@ -6,22 +6,30 @@ import {
   Body,
   Put,
   Delete,
+  UsePipes,
+  NotFoundException,
 } from '@nestjs/common';
 import { HoublonService } from './houblons.service';
 import { Houblon as HoublonModel, Prisma } from '@prisma/client';
+import { ConvertParamToNumberPipe } from 'src/pipe/ConvertParamToNumber.pipe';
 
 @Controller('houblons')
 export class HoublonsController {
   constructor(private readonly houblonService: HoublonService) {}
 
   @Get(':id')
-  async getHoublonById(@Param('id') id: string): Promise<HoublonModel> {
-    return this.houblonService.getHoublonById({ id: Number(id) });
+  @UsePipes(ConvertParamToNumberPipe)
+  async getHoublonById(@Param('id') id: number): Promise<HoublonModel> {
+    return this.houblonService.getHoublonById({ id });
   }
 
   @Get()
   async getHoublons(): Promise<HoublonModel[]> {
-    return this.houblonService.getHoublons();
+    const houblons = await this.houblonService.getHoublons();
+    if (houblons.length === 0) {
+      throw new NotFoundException('no houblon was found');
+    }
+    return houblons;
   }
 
   @Post()
@@ -35,19 +43,21 @@ export class HoublonsController {
   }
 
   @Put(':id')
+  @UsePipes(ConvertParamToNumberPipe)
   async updatehoublon(
     @Body() houblonsData: Prisma.HoublonUpdateInput,
-    @Param('id') id: string,
+    @Param('id') id: number,
   ): Promise<HoublonModel> {
     const { ...data } = houblonsData;
     return this.houblonService.updatehoublon({
-      where: { id: Number(id) },
+      where: { id },
       data: { ...data },
     });
   }
 
   @Delete(':id')
-  async deleteHoublon(@Param('id') id: string): Promise<HoublonModel> {
-    return this.houblonService.deleteHoublon({ id: Number(id) });
+  @UsePipes(ConvertParamToNumberPipe)
+  async deleteHoublon(@Param('id') id: number): Promise<HoublonModel> {
+    return this.houblonService.deleteHoublon({ id });
   }
 }

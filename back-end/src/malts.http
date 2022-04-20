@@ -3,7 +3,7 @@ Content-Type: application/json
 
 ##################
 
-get http://localhost:3000/malts/1
+get http://localhost:3000/malts/2
 Content-Type: application/json
 
 ##################
@@ -19,14 +19,14 @@ Content-Type: application/json
 ###################
 
 
-PUT http://localhost:3000/malts/1
+PUT http://localhost:3000/malts/2
 Content-Type: application/json
 
 {
     "name": "Wild JS",
     "origin": "Ambré"
-  }
+}
 
 ####################
 
-DELETE http://localhost:3000/malts/1
+DELETE http://localhost:3000/malts/2

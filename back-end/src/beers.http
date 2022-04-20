@@ -3,7 +3,7 @@ Content-Type: application/json
 
 ##################
 
-get http://localhost:3000/beers/1
+get http://localhost:3000/beers/5
 Content-Type: application/json
 
 ##################
@@ -36,7 +36,7 @@ Content-Type: application/json
 ###################
 
 
-PUT http://localhost:3000/beers/1
+PUT http://localhost:3000/beers/5
 Content-Type: application/json
 
 {
@@ -56,13 +56,6 @@ Content-Type: application/json
         "quantity": 580
       }
     ],
-    "other": [
-      {
-        "name": "basilic",
-        "quantity": 580,
-        "unity": "g"
-      }
-    ],
     "levure": "MS-U44",
     "price": 63,
     "etiquette": "https://static.pratique.fr/images/unsized/et/etiquette-champagne.jpg"
@@ -70,4 +63,4 @@ Content-Type: application/json
 
 ####################
 
-DELETE http://localhost:3000/beers/1
+DELETE http://localhost:3000/beers/5

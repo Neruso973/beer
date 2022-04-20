@@ -3,7 +3,7 @@ Content-Type: application/json
 
 ##################
 
-get http://localhost:3000/houblons/1
+get http://localhost:3000/houblons/2
 Content-Type: application/json
 
 ##################
@@ -19,7 +19,7 @@ Content-Type: application/json
 ###################
 
 
-PUT http://localhost:3000/houblons/1
+PUT http://localhost:3000/houblons/2
 Content-Type: application/json
 
 {
@@ -29,4 +29,4 @@ Content-Type: application/json
 
 ####################
 
-DELETE http://localhost:3000/houblons/1
+DELETE http://localhost:3000/houblons/2
