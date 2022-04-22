@@ -7,16 +7,16 @@ import {
   Put,
   UsePipes,
 } from '@nestjs/common';
-import { ConvertParamToNumberPipe } from 'src/pipe/ConvertParamToNumber.pipe';
-import { User as UserModel, Prisma } from '@prisma/client';
+import { ParseIntParamsPipe } from 'src/pipe/ConvertParamToNumber.pipe';
+import { User as UserModel } from '@prisma/client';
 import { UsersService } from './users.service';
 
-@Controller('users')
+@Controller('api/users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
   @Get(':id')
-  @UsePipes(ConvertParamToNumberPipe)
+  @UsePipes(ParseIntParamsPipe)
   async getUserById(@Param('id') id: number): Promise<UserModel> {
     const user = await this.userService.getUserById({ id });
     if (!user) {
@@ -55,7 +55,7 @@ export class UsersController {
   }
 
   @Delete(':id')
-  @UsePipes(ConvertParamToNumberPipe)
+  @UsePipes(ParseIntParamsPipe)
   async deleteUser(@Param('id') id: number): Promise<UserModel> {
     const user = await this.userService.getUserById({ id });
     if (!user) {

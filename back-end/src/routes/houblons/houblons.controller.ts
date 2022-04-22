@@ -11,14 +11,14 @@ import {
 } from '@nestjs/common';
 import { HoublonService } from './houblons.service';
 import { Houblon as HoublonModel, Prisma } from '@prisma/client';
-import { ConvertParamToNumberPipe } from 'src/pipe/ConvertParamToNumber.pipe';
+import { ParseIntParamsPipe } from 'src/pipe/ConvertParamToNumber.pipe';
 
-@Controller('houblons')
+@Controller('api/houblons')
 export class HoublonsController {
   constructor(private readonly houblonService: HoublonService) {}
 
   @Get(':id')
-  @UsePipes(ConvertParamToNumberPipe)
+  @UsePipes(ParseIntParamsPipe)
   async getHoublonById(@Param('id') id: number): Promise<HoublonModel> {
     return this.houblonService.getHoublonById({ id });
   }
@@ -43,7 +43,7 @@ export class HoublonsController {
   }
 
   @Put(':id')
-  @UsePipes(ConvertParamToNumberPipe)
+  @UsePipes(ParseIntParamsPipe)
   async updatehoublon(
     @Body() houblonsData: Prisma.HoublonUpdateInput,
     @Param('id') id: number,
@@ -56,7 +56,7 @@ export class HoublonsController {
   }
 
   @Delete(':id')
-  @UsePipes(ConvertParamToNumberPipe)
+  @UsePipes(ParseIntParamsPipe)
   async deleteHoublon(@Param('id') id: number): Promise<HoublonModel> {
     return this.houblonService.deleteHoublon({ id });
   }

@@ -17,6 +17,8 @@ model User {
   password   String   @db.VarChar(255)
   created_at DateTime @default(now())
   avatar     String?  @db.Text
+  role       Int      @default(1)
+  recipes    Beer[]
 }
 
 model Beer {
@@ -29,6 +31,7 @@ model Beer {
   levure    String @db.VarChar(255)
   price     Int
   etiquette String @db.VarChar(255)
+  user      User[]
 }
 
 model Houblon {

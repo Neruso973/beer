@@ -1,14 +1,14 @@
-GET  http://localhost:3000/malts/
+GET  http://localhost:3333/malts/
 Content-Type: application/json
 
 ##################
 
-get http://localhost:3000/malts/2
+get http://localhost:3333/malts/2
 Content-Type: application/json
 
 ##################
 
-POST http://localhost:3000/malts/
+POST http://localhost:3333/malts/
 Content-Type: application/json
 
  {
@@ -19,7 +19,7 @@ Content-Type: application/json
 ###################
 
 
-PUT http://localhost:3000/malts/2
+PUT http://localhost:3333/malts/2
 Content-Type: application/json
 
 {
@@ -29,4 +29,4 @@ Content-Type: application/json
 
 ####################
 
-DELETE http://localhost:3000/malts/2
+DELETE http://localhost:3333/malts/2

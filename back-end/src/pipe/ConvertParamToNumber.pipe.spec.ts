@@ -1,7 +1,7 @@
-import { ConvertParamToNumberPipe } from './ConvertParamToNumber.pipe';
+import { ParseIntParamsPipe } from './ConvertParamToNumber.pipe';
 
 describe('NumPipe', () => {
   it('should be defined', () => {
-    expect(new ConvertParamToNumberPipe()).toBeDefined();
+    expect(new ParseIntParamsPipe()).toBeDefined();
   });
 });

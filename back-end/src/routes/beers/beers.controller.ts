@@ -11,14 +11,14 @@ import {
 } from '@nestjs/common';
 import { BeerService } from './beers.service';
 import { Beer as BeerModel, Prisma } from '@prisma/client';
-import { ConvertParamToNumberPipe } from 'src/pipe/ConvertParamToNumber.pipe';
+import { ParseIntParamsPipe } from 'src/pipe/ConvertParamToNumber.pipe';
 
-@Controller('beers')
+@Controller('api/beers')
 export class BeersController {
   constructor(private readonly beerService: BeerService) {}
 
   @Get(':id')
-  @UsePipes(ConvertParamToNumberPipe)
+  @UsePipes(ParseIntParamsPipe)
   async getBeerById(@Param('id') id: number): Promise<BeerModel> {
     const beer = await this.beerService.getBeerById({ id });
     if (!beer) {
@@ -47,7 +47,7 @@ export class BeersController {
   }
 
   @Put(':id')
-  @UsePipes(ConvertParamToNumberPipe)
+  @UsePipes(ParseIntParamsPipe)
   async updatebeer(
     @Param('id') id: number,
     @Body() beersData: Prisma.BeerUpdateInput,
@@ -64,7 +64,7 @@ export class BeersController {
   }
 
   @Delete(':id')
-  @UsePipes(ConvertParamToNumberPipe)
+  @UsePipes(ParseIntParamsPipe)
   async deleteBeer(@Param('id') id: number): Promise<BeerModel> {
     const beer = await this.beerService.getBeerById({ id });
     if (!beer) {

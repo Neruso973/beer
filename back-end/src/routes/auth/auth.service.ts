@@ -5,10 +5,9 @@ import {
 } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from 'src/routes/users/users.service';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
-import { returnUser } from './interface';
 import { JwtService } from '@nestjs/jwt';
 
 const scrypt = promisify(_scrypt);

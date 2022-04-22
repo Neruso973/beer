@@ -10,14 +10,14 @@ import {
 } from '@nestjs/common';
 import { MaltService } from './malts.service';
 import { Malt as MaltModel, Prisma } from '@prisma/client';
-import { ConvertParamToNumberPipe } from 'src/pipe/ConvertParamToNumber.pipe';
+import { ParseIntParamsPipe } from 'src/pipe/ConvertParamToNumber.pipe';
 
-@Controller('malts')
+@Controller('api/malts')
 export class MaltsController {
   constructor(private readonly maltService: MaltService) {}
 
   @Get(':id')
-  @UsePipes(ConvertParamToNumberPipe)
+  @UsePipes(ParseIntParamsPipe)
   async getMaltById(@Param('id') id: number): Promise<MaltModel> {
     return this.maltService.getMaltById({ id });
   }
@@ -38,7 +38,7 @@ export class MaltsController {
   }
 
   @Put(':id')
-  @UsePipes(ConvertParamToNumberPipe)
+  @UsePipes(ParseIntParamsPipe)
   async updatemalt(
     @Body() maltsData: Prisma.MaltUpdateInput,
     @Param('id') id: number,
@@ -51,7 +51,7 @@ export class MaltsController {
   }
 
   @Delete(':id')
-  @UsePipes(ConvertParamToNumberPipe)
+  @UsePipes(ParseIntParamsPipe)
   async deleteMalt(@Param('id') id: number): Promise<MaltModel> {
     return this.maltService.deleteMalt({ id });
   }

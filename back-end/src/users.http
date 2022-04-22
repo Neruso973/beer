@@ -1,25 +1,25 @@
-GET  http://localhost:3000/users/
+GET  http://localhost:3333/users/
 Content-Type: application/json
 
 ##################
 
-get http://localhost:3000/users/6
+get http://localhost:3333/users/6
 Content-Type: application/json
 
 ##################
 
-POST http://localhost:3000/auth/signup
+POST http://localhost:3333/auth/signup
 Content-Type: application/json
 
  {
-    "username": "nu",
+    "username": "nuxdz",
     "password": "Azertyzofn",
     "email": "exesqdmczdfgple1@ccmail.com"
   }
 
 ##################
 
-POST http://localhost:3000/auth/signin
+POST http://localhost:3333/auth/signin
 Content-Type: application/json
 
  {
@@ -30,7 +30,7 @@ Content-Type: application/json
 ###################
 
 
-PUT http://localhost:3000/auth/update
+PUT http://localhost:3333/auth/update
 Content-Type: application/json
 
 {
@@ -42,4 +42,4 @@ Content-Type: application/json
 
 ####################
 
-DELETE http://localhost:3000/users/12
+DELETE http://localhost:3333/users/12

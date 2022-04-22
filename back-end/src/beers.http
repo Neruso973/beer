@@ -1,14 +1,14 @@
-GET  http://localhost:3000/beers/
+GET  http://localhost:3333/api/beers/
 Content-Type: application/json
 
 ##################
 
-get http://localhost:3000/beers/5
+get http://localhost:3333/api/beers/5
 Content-Type: application/json
 
 ##################
 
-POST http://localhost:3000/beers/
+POST http://localhost:3333/api/beers/
 Content-Type: application/json
 
  {
@@ -36,7 +36,7 @@ Content-Type: application/json
 ###################
 
 
-PUT http://localhost:3000/beers/5
+PUT http://localhost:3333/api/beers/5
 Content-Type: application/json
 
 {
@@ -63,4 +63,4 @@ Content-Type: application/json
 
 ####################
 
-DELETE http://localhost:3000/beers/5
+DELETE http://localhost:3333/api/beers/5

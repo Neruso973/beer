@@ -10,14 +10,14 @@ import {
 } from '@nestjs/common';
 import { LevureService } from './levure.service';
 import { Levure as LevureModel, Prisma } from '@prisma/client';
-import { ConvertParamToNumberPipe } from 'src/pipe/ConvertParamToNumber.pipe';
+import { ParseIntParamsPipe } from 'src/pipe/ConvertParamToNumber.pipe';
 
-@Controller('levure')
+@Controller('api/levure')
 export class LevureController {
   constructor(private readonly levureService: LevureService) {}
 
   @Get(':id')
-  @UsePipes(ConvertParamToNumberPipe)
+  @UsePipes(ParseIntParamsPipe)
   async getLevureById(@Param('id') id: number): Promise<LevureModel> {
     return this.levureService.getLevureById({ id });
   }
@@ -38,7 +38,7 @@ export class LevureController {
   }
 
   @Put(':id')
-  @UsePipes(ConvertParamToNumberPipe)
+  @UsePipes(ParseIntParamsPipe)
   async updatelevure(
     @Body() levureData: Prisma.LevureUpdateInput,
     @Param('id') id: number,
@@ -51,7 +51,7 @@ export class LevureController {
   }
 
   @Delete(':id')
-  @UsePipes(ConvertParamToNumberPipe)
+  @UsePipes(ParseIntParamsPipe)
   async deleteLevure(@Param('id') id: number): Promise<LevureModel> {
     return this.levureService.deleteLevure({ id });
   }
