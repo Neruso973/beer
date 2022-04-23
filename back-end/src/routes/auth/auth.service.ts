@@ -79,34 +79,28 @@ export class AuthService {
     return { access_token: this.jwtService.sign(payload) };
   }
 
-  async updateUser(userData: User): Promise<User> {
+  async updateUser(id: number, userData: User): Promise<User> {
     // see if username exist
-    const username = userData.username;
-    const email = userData.email;
 
-    const existingUserName = await this.usersService.getUserByUsername({
-      username,
-    });
-    const existingUserMail = await this.usersService.getUserByMail({
-      email,
-    });
+    const userByName = await this.usersService.getUserByUsername(userData);
+    const userByMail = await this.usersService.getUserByMail(userData);
+    if (id === userByName.id && id === userByMail.id) {
+      // Hash the password
+      // Generate a salt
+      const salt = randomBytes(8).toString('hex');
+      //Hash the salt and password together
+      const hash = (await scrypt(userData.password, salt, 32)) as Buffer;
+      // Join hashed password and salt
+      const result = salt + '.' + hash.toString('hex');
 
-    if (existingUserName) {
+      userData.password = result;
+
+      return this.usersService.updateuser(userData);
+    } else if (id !== userByName.id && id === userByMail.id) {
       throw new BadRequestException('username already exist');
     }
-    if (existingUserMail) {
+    if (id === userByName.id && id !== userByMail.id) {
       throw new BadRequestException('email already exist');
     }
-    // Hash the password
-    // Generate a salt
-    const salt = randomBytes(8).toString('hex');
-    //Hash the salt and password together
-    const hash = (await scrypt(userData.password, salt, 32)) as Buffer;
-    // Join hashed password and salt
-    const result = salt + '.' + hash.toString('hex');
-
-    userData.password = result;
-
-    return this.usersService.updateuser(userData);
   }
 }

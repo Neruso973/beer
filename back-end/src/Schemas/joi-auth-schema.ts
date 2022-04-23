@@ -20,10 +20,23 @@ export const signinSchema = Joi.object({
   password: JoiPassword.string()
     .min(3)
     .max(20)
-    .minOfSpecialCharacters(2)
-    .minOfLowercase(2)
-    .minOfUppercase(2)
-    .minOfNumeric(2)
+    .minOfSpecialCharacters(1)
+    .minOfLowercase(1)
+    .minOfUppercase(1)
+    .minOfNumeric(1)
+    .noWhiteSpaces()
+    .required(),
+});
+
+export const updateSchema = Joi.object({
+  username: Joi.string().min(3).max(20).required(),
+  password: JoiPassword.string()
+    .min(3)
+    .max(20)
+    .minOfSpecialCharacters(1)
+    .minOfLowercase(1)
+    .minOfUppercase(1)
+    .minOfNumeric(1)
     .noWhiteSpaces()
     .required(),
 });

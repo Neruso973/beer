@@ -12,7 +12,9 @@ import {
 import { HoublonService } from './houblons.service';
 import { Houblon as HoublonModel, Prisma } from '@prisma/client';
 import { ParseIntParamsPipe } from 'src/pipe/ConvertParamToNumber.pipe';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('api/houblons')
 @Controller('api/houblons')
 export class HoublonsController {
   constructor(private readonly houblonService: HoublonService) {}
@@ -32,6 +34,10 @@ export class HoublonsController {
     return houblons;
   }
 
+  @ApiBody({
+    type: 'Prisma.BeerCreateInput',
+    description: 'Store product structure',
+  })
   @Post()
   async createHoublon(
     @Body() houblonsData: Prisma.HoublonCreateInput,
@@ -42,6 +48,10 @@ export class HoublonsController {
     });
   }
 
+  @ApiBody({
+    type: 'Prisma.BeerCreateInput',
+    description: 'Store product structure',
+  })
   @Put(':id')
   @UsePipes(ParseIntParamsPipe)
   async updatehoublon(

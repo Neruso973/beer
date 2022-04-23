@@ -11,6 +11,7 @@ import { UsersModule } from './routes/users/users.module';
 
 @Module({
   imports: [
+    AuthModule,
     BeersModule,
     HoublonsModule,
     MaltsModule,

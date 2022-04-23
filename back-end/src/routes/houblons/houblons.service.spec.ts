@@ -1,15 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { HoublonsService } from './houblons.service';
+import { PrismaService } from 'src/prisma.service';
+import { HoublonService } from './houblons.service';
 
 describe('HoublonsService', () => {
-  let service: HoublonsService;
+  let service: HoublonService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [HoublonsService],
+      providers: [HoublonService, PrismaService],
     }).compile();
 
-    service = module.get<HoublonsService>(HoublonsService);
+    service = module.get<HoublonService>(HoublonService);
   });
 
   it('should be defined', () => {

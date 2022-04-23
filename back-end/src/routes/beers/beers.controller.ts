@@ -12,7 +12,9 @@ import {
 import { BeerService } from './beers.service';
 import { Beer as BeerModel, Prisma } from '@prisma/client';
 import { ParseIntParamsPipe } from 'src/pipe/ConvertParamToNumber.pipe';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('api/beers')
 @Controller('api/beers')
 export class BeersController {
   constructor(private readonly beerService: BeerService) {}
@@ -36,6 +38,10 @@ export class BeersController {
     return beers;
   }
 
+  @ApiBody({
+    type: 'Prisma.BeerCreateInput',
+    description: 'Store product structure',
+  })
   @Post()
   async createBeer(
     @Body() beersData: Prisma.BeerCreateInput,
@@ -46,6 +52,10 @@ export class BeersController {
     });
   }
 
+  @ApiBody({
+    type: 'Prisma.BeerCreateInput',
+    description: 'Store product structure',
+  })
   @Put(':id')
   @UsePipes(ParseIntParamsPipe)
   async updatebeer(

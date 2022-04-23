@@ -11,7 +11,9 @@ import {
 import { LevureService } from './levure.service';
 import { Levure as LevureModel, Prisma } from '@prisma/client';
 import { ParseIntParamsPipe } from 'src/pipe/ConvertParamToNumber.pipe';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('api/levure')
 @Controller('api/levure')
 export class LevureController {
   constructor(private readonly levureService: LevureService) {}
@@ -27,6 +29,10 @@ export class LevureController {
     return this.levureService.getLevure();
   }
 
+  @ApiBody({
+    type: 'Prisma.BeerCreateInput',
+    description: 'Store product structure',
+  })
   @Post()
   async createLevure(
     @Body() levureData: Prisma.LevureCreateInput,
@@ -37,6 +43,10 @@ export class LevureController {
     });
   }
 
+  @ApiBody({
+    type: 'Prisma.BeerCreateInput',
+    description: 'Store product structure',
+  })
   @Put(':id')
   @UsePipes(ParseIntParamsPipe)
   async updatelevure(

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import config from 'src/config';
 import { PrismaService } from 'src/prisma.service';
 import { UsersService } from 'src/routes/users/users.service';

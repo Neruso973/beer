@@ -1,10 +1,14 @@
-GET  http://localhost:3333/users/
+GET  http://localhost:3333/users/1
 Content-Type: application/json
 
 ##################
 
-get http://localhost:3333/users/6
+get http://localhost:3333/api/users/email
 Content-Type: application/json
+
+{
+  "email": "nelson.ntepp@icloud.com"
+}
 
 ##################
 
@@ -30,14 +34,13 @@ Content-Type: application/json
 ###################
 
 
-PUT http://localhost:3333/auth/update
+PUT http://localhost:3333/api/auth/update/1
 Content-Type: application/json
 
 {
-    "id": 13,
-    "username": "Neregguxo",
-    "password": "Azercety",
-    "email": "exesqcermdffgple1@ccmail.com"
+    "username": "Neruso",
+    "email": "nelson.ntepp@icloud.com",
+    "password": "yyr5wzfph3emV*"
 }
 
 ####################

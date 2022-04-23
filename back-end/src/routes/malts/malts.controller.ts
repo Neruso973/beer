@@ -11,7 +11,9 @@ import {
 import { MaltService } from './malts.service';
 import { Malt as MaltModel, Prisma } from '@prisma/client';
 import { ParseIntParamsPipe } from 'src/pipe/ConvertParamToNumber.pipe';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('api/malts')
 @Controller('api/malts')
 export class MaltsController {
   constructor(private readonly maltService: MaltService) {}
@@ -27,6 +29,10 @@ export class MaltsController {
     return this.maltService.getMalts();
   }
 
+  @ApiBody({
+    type: 'Prisma.BeerCreateInput',
+    description: 'Store product structure',
+  })
   @Post()
   async createMalt(
     @Body() maltsData: Prisma.MaltCreateInput,
@@ -37,6 +43,10 @@ export class MaltsController {
     });
   }
 
+  @ApiBody({
+    type: 'Prisma.BeerCreateInput',
+    description: 'Store product structure',
+  })
   @Put(':id')
   @UsePipes(ParseIntParamsPipe)
   async updatemalt(

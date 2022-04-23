@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -10,7 +11,9 @@ import {
 import { ParseIntParamsPipe } from 'src/pipe/ConvertParamToNumber.pipe';
 import { User as UserModel } from '@prisma/client';
 import { UsersService } from './users.service';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('api/users')
 @Controller('api/users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
@@ -25,9 +28,9 @@ export class UsersController {
     return user;
   }
 
-  @Get(':username')
+  @Get('username')
   async getUserByUsername(
-    @Param('username') username: string,
+    @Body('username') username: string,
   ): Promise<UserModel> {
     const user = await this.userService.getUserByUsername({ username });
     if (!user) {
@@ -36,15 +39,22 @@ export class UsersController {
     return user;
   }
 
-  @Get(':email')
-  async getUserByMail(@Param('email') email: string): Promise<UserModel> {
+  @ApiBody({
+    type: 'Prisma.BeerCreateInput',
+    description: 'Store product structure',
+  })
+  @Get('email')
+  async getUserByMail(@Body('email') email: string): Promise<UserModel> {
     const user = await this.userService.getUserByMail({ email });
     if (!user) {
       throw new NotFoundException('No user found');
     }
     return user;
   }
-
+  @ApiBody({
+    type: 'Prisma.BeerCreateInput',
+    description: 'Store product structure',
+  })
   @Get()
   async getUsers(): Promise<UserModel[]> {
     const users = await this.userService.getUsers();
