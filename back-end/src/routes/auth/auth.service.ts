@@ -4,19 +4,18 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
-import { PrismaService } from 'src/prisma.service';
 import { UsersService } from 'src/routes/users/users.service';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
 import { JwtService } from '@nestjs/jwt';
 import { GoogleUser } from './Strategy/interfaces';
+import { number } from 'joi';
 
 const scrypt = promisify(_scrypt);
 
 @Injectable()
 export class AuthService {
   constructor(
-    private prisma: PrismaService,
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
   ) {}
@@ -87,6 +86,9 @@ export class AuthService {
     }
     if (id !== userData.id) {
       throw new BadRequestException('you try to update an incorect user');
+    }
+    if (userData.password.length < 8 || userData.password.length > 20) {
+      throw new BadRequestException('bad password');
     }
     if (id === userByName.id && id === userByMail.id) {
       // Hash the password

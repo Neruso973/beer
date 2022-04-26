@@ -13,15 +13,10 @@ import {
 import { User as UserModel, Prisma, User } from '@prisma/client';
 import { JoiValidationPipe } from 'src/pipe/joi-validation.pipe';
 import { AuthService } from './auth.service';
-import {
-  signupSchema,
-  signinSchema,
-  updateSchema,
-} from '../../Schemas/joi-auth-schema';
+import { signupSchema, signinSchema } from '../../Schemas/joi-auth-schema';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { ParseIntParamsPipe } from 'src/pipe/ConvertParamToNumber.pipe';
 import { AuthGuard } from '@nestjs/passport';
-import { GoogleUser } from './Strategy/interfaces';
 
 @ApiTags('api/auth')
 @Controller('api/auth')
@@ -62,7 +57,6 @@ export class AuthController {
   })
   @Put('update/:id')
   @UsePipes(ParseIntParamsPipe)
-  // @UsePipes(new JoiValidationPipe(updateSchema))
   async updateUser(
     @Param('id') id: number,
     @Body() userData: User,
