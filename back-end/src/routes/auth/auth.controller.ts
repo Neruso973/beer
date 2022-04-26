@@ -1,4 +1,15 @@
-import { Body, Controller, Param, Post, Put, UsePipes } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Req,
+  UseGuards,
+  UsePipes,
+  Logger,
+} from '@nestjs/common';
 import { User as UserModel, Prisma, User } from '@prisma/client';
 import { JoiValidationPipe } from 'src/pipe/joi-validation.pipe';
 import { AuthService } from './auth.service';
@@ -9,6 +20,8 @@ import {
 } from '../../Schemas/joi-auth-schema';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { ParseIntParamsPipe } from 'src/pipe/ConvertParamToNumber.pipe';
+import { AuthGuard } from '@nestjs/passport';
+import { GoogleUser } from './Strategy/interfaces';
 
 @ApiTags('api/auth')
 @Controller('api/auth')
@@ -49,12 +62,21 @@ export class AuthController {
   })
   @Put('update/:id')
   @UsePipes(ParseIntParamsPipe)
-  @UsePipes(new JoiValidationPipe(updateSchema))
+  // @UsePipes(new JoiValidationPipe(updateSchema))
   async updateUser(
     @Param('id') id: number,
     @Body() userData: User,
   ): Promise<User> {
-    console.log(userData);
     return this.authService.updateUser(id, userData);
+  }
+
+  @Get('google')
+  @UseGuards(AuthGuard('google'))
+  async googleAuth(@Req() req) {}
+
+  @Get('google/redirect')
+  @UseGuards(AuthGuard('google'))
+  googleAuthRedirect(@Req() req: any) {
+    return this.authService.googleLogin(req);
   }
 }

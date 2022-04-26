@@ -1,56 +1,32 @@
 import {
-  Body,
   Controller,
   Delete,
   Get,
   NotFoundException,
   Param,
-  Put,
   UsePipes,
 } from '@nestjs/common';
 import { ParseIntParamsPipe } from 'src/pipe/ConvertParamToNumber.pipe';
-import { User as UserModel } from '@prisma/client';
+import { Prisma, User as UserModel } from '@prisma/client';
 import { UsersService } from './users.service';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('api/users')
+@ApiTags('api/')
 @Controller('api/users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
-  @Get(':id')
-  @UsePipes(ParseIntParamsPipe)
-  async getUserById(@Param('id') id: number): Promise<UserModel> {
-    const user = await this.userService.getUserById({ id });
-    if (!user) {
-      throw new NotFoundException('No user found');
-    }
-    return user;
-  }
-
-  @Get('username')
-  async getUserByUsername(
-    @Body('username') username: string,
+  @Get(':param')
+  async getUser(
+    @Param('param') param: Prisma.UserWhereUniqueInput,
   ): Promise<UserModel> {
-    const user = await this.userService.getUserByUsername({ username });
+    const user = await this.userService.getUser(param);
     if (!user) {
       throw new NotFoundException('No user found');
     }
     return user;
   }
 
-  @ApiBody({
-    type: 'Prisma.BeerCreateInput',
-    description: 'Store product structure',
-  })
-  @Get('email')
-  async getUserByMail(@Body('email') email: string): Promise<UserModel> {
-    const user = await this.userService.getUserByMail({ email });
-    if (!user) {
-      throw new NotFoundException('No user found');
-    }
-    return user;
-  }
   @ApiBody({
     type: 'Prisma.BeerCreateInput',
     description: 'Store product structure',
@@ -67,10 +43,10 @@ export class UsersController {
   @Delete(':id')
   @UsePipes(ParseIntParamsPipe)
   async deleteUser(@Param('id') id: number): Promise<UserModel> {
-    const user = await this.userService.getUserById({ id });
+    const user = await this.userService.getUser(id);
     if (!user) {
       throw new NotFoundException('No user can be delated');
     }
-    return this.userService.deleteUser({ id });
+    return this.userService.deleteUser(id);
   }
 }

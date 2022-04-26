@@ -30,6 +30,7 @@ export const signinSchema = Joi.object({
 
 export const updateSchema = Joi.object({
   username: Joi.string().min(3).max(20).required(),
+  email: Joi.string().email().max(255).required(),
   password: JoiPassword.string()
     .min(3)
     .max(20)

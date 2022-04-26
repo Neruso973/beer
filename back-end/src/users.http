@@ -1,48 +1,57 @@
-GET  http://localhost:3333/users/1
+GET  http://localhost:3333/api/users/
 Content-Type: application/json
 
 ##################
 
-get http://localhost:3333/api/users/email
+GET http://localhost:3333/api/users/13
 Content-Type: application/json
 
-{
-  "email": "nelson.ntepp@icloud.com"
-}
 
 ##################
 
-POST http://localhost:3333/auth/signup
+GET http://localhost:3333/api/users/nelson.ntepp@icloud.com
+Content-Type: application/json
+
+
+##################
+
+GET http://localhost:3333/api/users/Neruso1
+Content-Type: application/json
+
+
+##################
+
+POST http://localhost:3333/api/auth/signup
 Content-Type: application/json
 
  {
-    "username": "nuxdz",
-    "password": "Azertyzofn",
-    "email": "exesqdmczdfgple1@ccmail.com"
+    "username": "Kalian",
+    "password": "Azerty123*",
+    "email": "kalian.iglesias@gmail.com"
   }
 
 ##################
 
-POST http://localhost:3333/auth/signin
+POST http://localhost:3333/api/auth/signin
 Content-Type: application/json
 
  {
-    "username": "neru",
-    "password": "Azertyzofn"
+    "username": "Kalian",
+    "password": "yyr5wzfph3emV*"
   }
 
 ###################
 
 
-PUT http://localhost:3333/api/auth/update/1
+PUT http://localhost:3333/api/auth/update/13
 Content-Type: application/json
 
 {
-    "username": "Neruso",
-    "email": "nelson.ntepp@icloud.com",
+    "username": "Kalian",
+    "email": "kalian.iglesias@gmail.com",
     "password": "yyr5wzfph3emV*"
 }
 
 ####################
 
-DELETE http://localhost:3333/users/12
+DELETE http://localhost:3333/api/users/14

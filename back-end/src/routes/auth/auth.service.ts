@@ -9,6 +9,7 @@ import { UsersService } from 'src/routes/users/users.service';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
 import { JwtService } from '@nestjs/jwt';
+import { GoogleUser } from './Strategy/interfaces';
 
 const scrypt = promisify(_scrypt);
 
@@ -26,12 +27,8 @@ export class AuthService {
     email,
   }: Prisma.UserCreateInput): Promise<User> {
     // see if username exist
-    const existingUserName = await this.usersService.getUserByUsername({
-      username,
-    });
-    const existingUserMail = await this.usersService.getUserByMail({
-      email,
-    });
+    const existingUserName = await this.usersService.getUser(username);
+    const existingUserMail = await this.usersService.getUser(email);
 
     if (existingUserName) {
       throw new BadRequestException('username already exist');
@@ -59,7 +56,7 @@ export class AuthService {
   }> {
     const username = data.username;
     const clearPassword = data.password;
-    const user = await this.usersService.getUserByUsername({ username });
+    const user = await this.usersService.getUser(username);
     if (!user) {
       throw new NotFoundException('User not found');
     }
@@ -82,8 +79,15 @@ export class AuthService {
   async updateUser(id: number, userData: User): Promise<User> {
     // see if username exist
 
-    const userByName = await this.usersService.getUserByUsername(userData);
-    const userByMail = await this.usersService.getUserByMail(userData);
+    const userByName = await this.usersService.getUser(userData.username);
+    const userByMail = await this.usersService.getUser(userData.email);
+    const userById = await this.usersService.getUser(id);
+    if (!userById) {
+      throw new NotFoundException('User not found');
+    }
+    if (id !== userData.id) {
+      throw new BadRequestException('you try to update an incorect user');
+    }
     if (id === userByName.id && id === userByMail.id) {
       // Hash the password
       // Generate a salt
@@ -95,12 +99,22 @@ export class AuthService {
 
       userData.password = result;
 
-      return this.usersService.updateuser(userData);
+      return this.usersService.updateuser(id, userData);
     } else if (id !== userByName.id && id === userByMail.id) {
       throw new BadRequestException('username already exist');
     }
     if (id === userByName.id && id !== userByMail.id) {
       throw new BadRequestException('email already exist');
     }
+  }
+
+  googleLogin(req: any): GoogleUser | string {
+    if (!req.user) {
+      return 'No user from google';
+    }
+
+    return {
+      user: req.user,
+    };
   }
 }

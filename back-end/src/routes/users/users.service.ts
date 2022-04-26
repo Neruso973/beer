@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../../prisma.service';
 import { User, Prisma } from '@prisma/client';
 
@@ -11,23 +11,17 @@ export class UsersService {
     return this.prisma.user.findMany();
   }
 
-  //Get user by ID
-  async getUserById(userId: Prisma.UserWhereUniqueInput): Promise<User | null> {
-    return this.prisma.user.findUnique({ where: userId });
-  }
-
-  //Get user by username
-  async getUserByUsername(
-    username: Prisma.UserWhereUniqueInput,
-  ): Promise<User | null> {
-    return this.prisma.user.findUnique({ where: username });
-  }
-
-  //Get user by mail
-  async getUserByMail(
-    email: Prisma.UserWhereUniqueInput,
-  ): Promise<User | null> {
-    return this.prisma.user.findUnique({ where: email });
+  //Get user by ID or email
+  async getUser(param: any): Promise<User | null> {
+    if (parseInt(param) == param) {
+      const id = parseInt(param);
+      return this.prisma.user.findUnique({ where: { id: id } });
+    } else {
+      if (param.match(/^\S{1,}@\S{2,}\.\S{2,}$/)) {
+        return this.prisma.user.findUnique({ where: { email: param } });
+      }
+      return this.prisma.user.findUnique({ where: { username: param } });
+    }
   }
 
   // create a new user
@@ -38,18 +32,17 @@ export class UsersService {
   }
 
   // update a user
-  async updateuser(data: User): Promise<User> {
-    const { id, ...body } = data;
+  async updateuser(id: number, data: User): Promise<User> {
     return this.prisma.user.update({
-      data: body,
-      where: { id },
+      where: { id: id },
+      data: data,
     });
   }
 
   //delete a user
-  async deleteUser(where: Prisma.UserWhereUniqueInput): Promise<User> {
+  async deleteUser(id: number): Promise<User> {
     return this.prisma.user.delete({
-      where,
+      where: { id: id },
     });
   }
 }
