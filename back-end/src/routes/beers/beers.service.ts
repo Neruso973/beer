@@ -1,12 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma.service';
+import { PrismaService } from '../../prisma.service';
 import { Beer, Prisma } from '@prisma/client';
 
 @Injectable()
 export class BeerService {
-  post(arg0: { id: number }): Beer | PromiseLike<Beer> {
-    throw new Error('Method not implemented.');
-  }
   constructor(private prisma: PrismaService) {}
 
   //Get all beers
