@@ -1,0 +1,49 @@
+<form (ngSubmit)="myForm.valid && onSubmit()" #myForm="ngForm">
+    <div>
+        <label for="name">Nom:</label>
+        <input name="name" type="text" [(ngModel)]="model.name"
+            #name="ngModel" required minlength="3" maxlength="15">
+    </div>
+    <div *ngIf="myForm.submitted && name.errors">
+        <span *ngIf="myForm.submitted && name.errors?.['minlength']"
+            [ngStyle]="{color: 'red'}">Le nom doit être supérieure à 3
+            charachtere</span>
+        <span *ngIf="myForm.submitted && name.errors?.['required']"
+            [ngStyle]="{color: 'red'}">le nom est requis</span>
+    </div>
+    <div>
+        <label for="type">Type:</label>
+        <input name="type" type="text" [(ngModel)]="model.type"
+            #type="ngModel" required minlength="3" maxlength="15">
+    </div>
+    <div *ngIf="myForm.submitted && type.errors">
+        <span *ngIf="type.errors?.['minlength']" [ngStyle]="{color: 'red'}">Le
+            Type de biere doit être supérieure à 3</span>
+        <span *ngIf="myForm.submitted && type.errors?.['required']"
+            [ngStyle]="{color: 'red'}">le nom est requis</span>
+    </div>
+    <!-- <div>
+        <label for="email">Email</label>
+        <input name="email" type="email" [(ngModel)]="model.email"
+            #email="ngModel" required email>
+    </div>
+    <div *ngIf="myForm.submitted && email.errors">
+        <span *ngIf="email.errors.email" [ngStyle]="{color: 'red'}">L'adresse
+            email doit être valide</span>
+        <span *ngIf="myForm.submitted && email.errors?.required"
+            [ngStyle]="{color: 'red'}">le mail est requis</span>
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input name="password" type="password" [(ngModel)]="model.password"
+            #password="ngModel" required minlength="8">
+    </div>
+    <div *ngIf="myForm.submitted && password.errors">
+        <span *ngIf="password.errors?.minlength" [ngStyle]="{color: 'red'}">La
+            longueur minimal doit être supérieure à 8</span>
+        <span *ngIf="myForm.submitted && password.errors?.required"
+            [ngStyle]="{color: 'red'}">le mdp est requis</span>
+    </div> -->
+    <button type="reset">Restaurer</button>
+    <button type="submit">Sauvegarder</button>
+</form>

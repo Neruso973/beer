@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { BeerListComponent } from './beer-list/beer-list.component';
 import { BeerCardComponent } from './beer-card/beer-card.component';
 import { BeerDescriptionComponent } from './beer-description/beer-description.component';
+import { AddbeersComponent } from './addbeers/addbeers.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { BeerDescriptionComponent } from './beer-description/beer-description.co
     BeerListComponent,
     BeerCardComponent,
     BeerDescriptionComponent,
+    AddbeersComponent,
   ],
   imports: [
     BrowserModule,
