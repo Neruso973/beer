@@ -1,0 +1,5 @@
+const config = {
+  secretKey: 'a phrase you want for your secure key',
+};
+
+export default config;
