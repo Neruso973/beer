@@ -1,49 +1,42 @@
-GET  http://localhost:3000/beers/
+GET  http://localhost:3333/api/beers/
 Content-Type: application/json
 
 ##################
 
-get http://localhost:3000/beers/1
+get http://localhost:3333/api/beers/5
 Content-Type: application/json
 
 ##################
 
-POST http://localhost:3000/beers/
+POST http://localhost:3333/api/beers/
 Content-Type: application/json
 
  {
-    "name": "Chasseresse",
-    "type": "Blanche",
+    "name": "Kalian",
+    "type": "Black IPA",
     "houblon": [
       {
-        "name": "citra",
+        "name": "Nelson",
         "origin": "US",
         "quantity": 580
       }
     ],
     "malts": [
       {
-        "name": "flocon de froment",
+        "name": "chocolat",
         "origin": "US",
-        "quantity": 580
-      }
-    ],
-    "other": [
-      {
-        "name": "basilic",
-        "quantity": 580,
-        "unity": "g"
+        "quantity": 1200
       }
     ],
     "levure": "MS-U44",
-    "price": 63,
+    "price": 53,
     "etiquette": "https://static.pratique.fr/images/unsized/et/etiquette-champagne.jpg"
   }
 
 ###################
 
 
-PUT http://localhost:3000/beers/1
+PUT http://localhost:3333/api/beers/5
 Content-Type: application/json
 
 {
@@ -63,13 +56,6 @@ Content-Type: application/json
         "quantity": 580
       }
     ],
-    "other": [
-      {
-        "name": "basilic",
-        "quantity": 580,
-        "unity": "g"
-      }
-    ],
     "levure": "MS-U44",
     "price": 63,
     "etiquette": "https://static.pratique.fr/images/unsized/et/etiquette-champagne.jpg"
@@ -77,4 +63,4 @@ Content-Type: application/json
 
 ####################
 
-DELETE http://localhost:3000/beers/1
+DELETE http://localhost:3333/api/beers/5

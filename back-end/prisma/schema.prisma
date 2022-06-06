@@ -10,6 +10,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id         Int      @id @default(autoincrement())
+  username   String   @unique @db.VarChar(255)
+  email      String   @unique @db.VarChar(255)
+  password   String   @db.VarChar(255)
+  created_at DateTime @default(now())
+  avatar     String?  @db.Text
+  role       Int      @default(1)
+  recipes    Beer[]
+}
+
 model Beer {
   id        Int    @id @default(autoincrement())
   name      String @db.VarChar(255)
@@ -20,6 +31,7 @@ model Beer {
   levure    String @db.VarChar(255)
   price     Int
   etiquette String @db.VarChar(255)
+  user      User[]
 }
 
 model Houblon {
@@ -37,10 +49,4 @@ model Malt {
 model Levure {
   id   Int    @id @default(autoincrement())
   name String @db.VarChar(255)
-}
-
-model Other {
-  id    Int    @id @default(autoincrement())
-  name  String @db.VarChar(255)
-  Unity String @db.VarChar(255)
 }
